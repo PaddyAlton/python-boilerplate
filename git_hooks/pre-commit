@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# PRE COMMIT SCRIPT: prevents you from committing code that won't pass a code formatting check
+# Should be placed in .git/hooks/pre-commit and made executable `chmod +x .git/hooks/pre-commit`
+
+set -e  # exit on non-zero error code
+
+# don't commit badly-formatted code
+echo -e "\n 1. Checking code style"
+pipenv run lint
+
+echo -e "\n 2. Checking code format"
+pipenv run fmt

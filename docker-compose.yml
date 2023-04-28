@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  myapp:
+    image: myapp:latest
+    container_name: myapp
+    entrypoint: /bin/bash # use docker-compose run myapp to open the shell
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: # overwrite container subdirectories with local subdirectory binds
+      - ./src:/app/src
+      - ./mypy:/app/mypy
+      - ./tests:/app/tests

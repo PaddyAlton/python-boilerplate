@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e  # exit on non-zero error code
+
+# PRE PUSH SCRIPT: enforces QA checks before pushing changes
+# Should be placed in .git/hooks/pre-push and made executable `chmod +x .git/hooks/pre-push`
+
+
+echo "Running pre-push hook..."
+
+echo -e "\n 1. Running static type check"
+pipenv run mypy
+
+echo -e "\n 2. Checking tests pass with acceptable coverage"
+pipenv run coverage
+
+echo -e "\n ...QA checks complete, pushing to remote."

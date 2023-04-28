@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+black = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+pytest-testmon = "*"
+pytest-watch = "*"
+ruff = "*"
+
+[scripts]
+coverage = "pytest --cov=src --cov-fail-under=0 --cov-report term-missing"
+fmt = "black --check src tests"
+fmt-fix = "black src tests"
+lint = "ruff check ."
+lint-fix = "ruff check --fix ."
+mypy = "mypy --config-file ./mypy/mypy.ini src"
+ptw = "pytest-watch"
+setup = """bash -c "git config core.hooksPath git_hooks && \
+            chmod +x git_hooks/pre-* && \
+            cp --no-clobber default.env .env && \
+            pipenv install --dev" """
+
+[requires]
+python_version = "3"
+
+[packages]
